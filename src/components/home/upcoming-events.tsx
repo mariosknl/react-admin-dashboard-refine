@@ -1,12 +1,11 @@
-import { CalendarOutlined } from "@ant-design/icons";
-import { Badge, Card, List } from "antd";
-import React, { useState } from "react";
-import { Text } from "../text";
-import UpcomingEventsSkeleton from "../skeleton/upcoming-events";
-import { getDate } from "@/utilities/helpers";
-import { useList } from "@refinedev/core";
 import { DASHBORAD_CALENDAR_UPCOMING_EVENTS_QUERY } from "@/graphql/queries";
+import { getDate } from "@/utilities/helpers";
+import { CalendarOutlined } from "@ant-design/icons";
+import { useList } from "@refinedev/core";
+import { Badge, Card, List } from "antd";
 import dayjs from "dayjs";
+import UpcomingEventsSkeleton from "../skeleton/upcoming-events";
+import { Text } from "../text";
 
 const UpcomingEvents = () => {
 	const { data, isLoading } = useList({
