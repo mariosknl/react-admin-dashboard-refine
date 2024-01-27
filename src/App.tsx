@@ -1,9 +1,4 @@
-import {
-	Authenticated,
-	GitHubBanner,
-	Refine,
-	WelcomePage,
-} from "@refinedev/core";
+import { Authenticated, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
@@ -17,20 +12,19 @@ import routerBindings, {
 } from "@refinedev/react-router-v6";
 import { App as AntdApp } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import { authProvider, dataProvider, liveProvider } from "./providers";
-import { Home, ForgotPassword, Login, Register, CompanyList } from "./pages";
 import Layout from "./components/layout";
 import { resources } from "./config/resources";
+import { CompanyList, ForgotPassword, Home, Login, Register } from "./pages";
 import Create from "./pages/company/create";
 import Edit from "./pages/company/edit";
-import List from "./pages/tasks/list";
 import CreateTask from "./pages/tasks/create";
 import EditTask from "./pages/tasks/edit";
+import List from "./pages/tasks/list";
+import { authProvider, dataProvider, liveProvider } from "./providers";
 
 function App() {
 	return (
 		<BrowserRouter>
-			<GitHubBanner />
 			<RefineKbarProvider>
 				<AntdApp>
 					<DevtoolsProvider>
