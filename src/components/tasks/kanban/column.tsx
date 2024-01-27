@@ -2,7 +2,6 @@ import { Text } from "@/components/text";
 import { PlusOutlined } from "@ant-design/icons";
 import { UseDroppableArguments, useDroppable } from "@dnd-kit/core";
 import { Badge, Button, Space } from "antd";
-import React from "react";
 
 type Props = {
 	id: string;
@@ -22,10 +21,7 @@ const KanbanColumn = ({
 	data,
 	onAddClick,
 }: React.PropsWithChildren<Props>) => {
-	const { isOver, setNodeRef, active } = useDroppable({
-		id,
-		data,
-	});
+	const { isOver, setNodeRef, active } = useDroppable({ id, data });
 
 	const onAddClickHandler = () => {
 		onAddClick?.({ id });
@@ -44,10 +40,13 @@ const KanbanColumn = ({
 				<Space style={{ width: "100%", justifyContent: "space-between" }}>
 					<Space>
 						<Text
-							ellipsis={{ tooltip: { title } }}
+							ellipsis={{ tooltip: title }}
 							size="xs"
 							strong
-							style={{ textTransform: "uppercase", whiteSpace: "nowrap" }}
+							style={{
+								textTransform: "uppercase",
+								whiteSpace: "nowrap",
+							}}
 						>
 							{title}
 						</Text>
@@ -61,7 +60,6 @@ const KanbanColumn = ({
 				</Space>
 				{description}
 			</div>
-
 			<div
 				style={{
 					flex: 1,

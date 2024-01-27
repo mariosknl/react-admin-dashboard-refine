@@ -9,6 +9,7 @@ import {
 	EyeOutlined,
 	MoreOutlined,
 } from "@ant-design/icons";
+import { useDelete, useNavigation } from "@refinedev/core";
 import {
 	Button,
 	Card,
@@ -21,7 +22,7 @@ import {
 	theme,
 } from "antd";
 import dayjs from "dayjs";
-import { memo, useMemo } from "react";
+import React, { memo, useMemo } from "react";
 
 type ProjectCardProps = {
 	id: string;
@@ -38,31 +39,40 @@ type ProjectCardProps = {
 const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
 	const { token } = theme.useToken();
 
-	const edit = () => {};
+	const { edit } = useNavigation();
+	const { mutate } = useDelete();
 
 	const dropdownItems = useMemo(() => {
 		const dropdownItems: MenuProps["items"] = [
 			{
-				label: "View Card",
+				label: "View card",
 				key: "1",
 				icon: <EyeOutlined />,
 				onClick: () => {
-					edit();
+					edit("tasks", id, "replace");
 				},
 			},
 			{
 				danger: true,
-				label: "Delete Card",
+				label: "Delete card",
 				key: "2",
 				icon: <DeleteOutlined />,
-				onClick: () => {},
+				onClick: () => {
+					mutate({
+						resource: "tasks",
+						id,
+						meta: {
+							operation: "task",
+						},
+					});
+				},
 			},
 		];
 
 		return dropdownItems;
 	}, []);
 
-	const dueDataOptions = useMemo(() => {
+	const dueDateOptions = useMemo(() => {
 		if (!dueDate) return null;
 
 		const date = dayjs(dueDate);
@@ -89,12 +99,18 @@ const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
 			<Card
 				size="small"
 				title={<Text ellipsis={{ tooltip: title }}>{title}</Text>}
-				onClick={() => edit()}
+				onClick={() => edit("tasks", id, "replace")}
 				extra={
 					<Dropdown
 						trigger={["click"]}
 						menu={{
 							items: dropdownItems,
+							onPointerDown: (e) => {
+								e.stopPropagation();
+							},
+							onClick: (e) => {
+								e.domEvent.stopPropagation();
+							},
 						}}
 						placement="bottom"
 						arrow={{ pointAtCenter: true }}
@@ -102,7 +118,13 @@ const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
 						<Button
 							type="text"
 							shape="circle"
-							icon={<MoreOutlined style={{ transform: "rotate(90deg)" }} />}
+							icon={
+								<MoreOutlined
+									style={{
+										transform: "rotate(90deg)",
+									}}
+								/>
+							}
 							onPointerDown={(e) => {
 								e.stopPropagation();
 							}}
@@ -122,19 +144,19 @@ const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
 					}}
 				>
 					<TextIcon style={{ marginRight: "4px" }} />
-					{dueDataOptions && (
+					{dueDateOptions && (
 						<Tag
 							icon={<ClockCircleOutlined style={{ fontSize: "12px" }} />}
 							style={{
 								padding: "0 4px",
 								marginInlineEnd: "0",
 								backgroundColor:
-									dueDataOptions.color === "default" ? "transparent" : "unset",
+									dueDateOptions.color === "default" ? "transparent" : "unset",
 							}}
-							color={dueDataOptions.color}
-							bordered={dueDataOptions.color !== "default"}
+							color={dueDateOptions.color}
+							bordered={dueDateOptions.color !== "default"}
 						>
-							{dueDataOptions.text}
+							{dueDateOptions.text}
 						</Tag>
 					)}
 					{!!users?.length && (

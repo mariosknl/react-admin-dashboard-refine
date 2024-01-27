@@ -1,11 +1,10 @@
 import { KanbanColumnSkeleton, ProjectCardSkeleton } from "@/components";
-// import { KanbanAddCardButton } from '@/components/tasks/kanban/add-card-button'
+import { KanbanAddCardButton } from "@/components/tasks/kanban/add-card-button";
 import {
 	KanbanBoardContainer,
 	KanbanBoard,
 } from "@/components/tasks/kanban/board";
 import { ProjectCardMemo } from "@/components/tasks/kanban/card";
-// import { ProjectCardMemo } from '@/components/tasks/kanban/card'
 import KanbanColumn from "@/components/tasks/kanban/column";
 import KanbanItem from "@/components/tasks/kanban/item";
 import { UPDATE_TASK_STAGE_MUTATION } from "@/graphql/mutations";
@@ -126,7 +125,7 @@ const List = ({ children }: React.PropsWithChildren) => {
 	return (
 		<>
 			<KanbanBoardContainer>
-				<KanbanBoard>
+				<KanbanBoard onDragEnd={handleOnDragEnd}>
 					<KanbanColumn
 						id="unassigned"
 						title={"unassigned"}
@@ -146,11 +145,11 @@ const List = ({ children }: React.PropsWithChildren) => {
 							</KanbanItem>
 						))}
 
-						{/* {!taskStages.unassignedStage.length && (
+						{!taskStages.unassignedStage.length && (
 							<KanbanAddCardButton
 								onClick={() => handleAddCard({ stageId: "unassigned" })}
 							/>
-						)} */}
+						)}
 					</KanbanColumn>
 
 					{taskStages.columns?.map((column) => (
@@ -161,7 +160,7 @@ const List = ({ children }: React.PropsWithChildren) => {
 							count={column.tasks.length}
 							onAddClick={() => handleAddCard({ stageId: column.id })}
 						>
-							{/* {!isLoading &&
+							{!isLoading &&
 								column.tasks.map((task) => (
 									<KanbanItem key={task.id} id={task.id} data={task}>
 										<ProjectCardMemo
@@ -169,12 +168,12 @@ const List = ({ children }: React.PropsWithChildren) => {
 											dueDate={task.dueDate || undefined}
 										/>
 									</KanbanItem>
-								))} */}
-							{/* {!column.tasks.length && (
+								))}
+							{!column.tasks.length && (
 								<KanbanAddCardButton
 									onClick={() => handleAddCard({ stageId: column.id })}
 								/>
-							)} */}
+							)}
 						</KanbanColumn>
 					))}
 				</KanbanBoard>
