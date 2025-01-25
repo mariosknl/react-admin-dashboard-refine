@@ -18,8 +18,8 @@
 		"@uiw/react-md-editor": "^4.0.3",
 		"antd": "^5.0.5",
 		"dayjs": "^1.11.10",
-		"react": "^18.0.0",
-		"react-dom": "^18.0.0",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
 		"react-router-dom": "^7.0.0"
 	},
 	"devDependencies": {
@@ -27,8 +27,8 @@
 		"@graphql-codegen/import-types-preset": "^3.0.0",
 		"@graphql-codegen/typescript-operations": "^4.0.1",
 		"@types/node": "^22.0.0",
-		"@types/react": "^18.0.0",
-		"@types/react-dom": "^18.0.0",
+		"@types/react": "^19.0.0",
+		"@types/react-dom": "^19.0.0",
 		"@typescript-eslint/eslint-plugin": "^8.0.0",
 		"@typescript-eslint/parser": "^8.0.0",
 		"@vitejs/plugin-react": "^4.0.0",
