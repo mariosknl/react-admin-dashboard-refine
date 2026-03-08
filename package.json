@@ -24,7 +24,7 @@
 	},
 	"devDependencies": {
 		"@graphql-codegen/cli": "^6.0.0",
-		"@graphql-codegen/import-types-preset": "^3.0.0",
+		"@graphql-codegen/import-types-preset": "^4.0.0",
 		"@graphql-codegen/typescript-operations": "^5.0.0",
 		"@types/node": "^24.0.0",
 		"@types/react": "^19.0.0",
